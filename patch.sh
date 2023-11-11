@@ -2,9 +2,9 @@
 
 BASEDIR=$(dirname $0)
 
-GNRL="NVIDIA-Linux-x86_64-535.104.05"
-VGPU="NVIDIA-Linux-x86_64-535.104.06-vgpu-kvm"
-GRID="NVIDIA-Linux-x86_64-535.104.05-grid"
+GNRL="NVIDIA-Linux-x86_64-535.129.03"
+VGPU="NVIDIA-Linux-x86_64-535.129.03-vgpu-kvm"
+GRID="NVIDIA-Linux-x86_64-535.129.03-grid"
 #WSYS="NVIDIA-Windows-x86_64-474.30"
 #WSYS="NVIDIA-Windows-x86_64-512.15"
 #WSYS="NVIDIA-Windows-x86_64-516.25"
@@ -16,13 +16,15 @@ GRID="NVIDIA-Linux-x86_64-535.104.05-grid"
 #WSYS="NVIDIA-Windows-x86_64-535.98"
 #WSYS="NVIDIA-Windows-x86_64-536.23"
 #WSYS="NVIDIA-Windows-x86_64-536.25"
-WSYS="NVIDIA-Windows-x86_64-537.13"
+#WSYS="NVIDIA-Windows-x86_64-537.13"
+WSYS="NVIDIA-Windows-x86_64-537.70"
 FRANKENSTEIN=false
 
 KLOGT=true
 TESTSIGN=true
 SETUP_TESTSIGN=false
 REPACK=false
+
 SWITCH_GRID_TO_GNRL=false
 
 if [ ! -e "${GNRL}.run" -a -e "${GRID}.run" ]; then
@@ -552,21 +554,65 @@ if $DO_VGPU; then
     applypatch ${TARGET} vcfg-v15vcs.patch
     applypatch ${TARGET} vcfg-testing.patch
     applypatch ${TARGET} verbose-firmware-load.patch
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x1E84 0x0000	# RTX 2070 super 8GB
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x1E81 0x0000	# RTX 2080 super 8GB
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x1f03 0x0000	# RTX 2060 12GB
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x1f11 0x0000	# RTX 2060 Mobile 6GB
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x2184 0x0000	# GTX 1660 6GB
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x1f95 0x0000	# GTX 1650 Ti Mobile 4GB
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x1EB1 0x0000	# Quadro RTX 4000
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x1ff2 0x0000	# Quadro T400 4GB
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x1B38 0x0 0x1C82 0x0000		# GTX 1050 Ti 4GB
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x1B38 0x0 0x1B81 0x0000		# GTX 1070
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x1B38 0x0 0x1D01 0x0000		# GTX 1030 -> Tesla P40
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x13F2 0x0 0x17FD 0x0000		# Tesla M40 -> Tesla M60
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x13F2 0x0 0x13C0 0x0000		# GTX 980 -> Tesla M60
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x13F2 0x0 0x13D7 0x0000		# GTX 980M -> Tesla M60
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x13BD 0x1160 0x139A 0x0000	# GTX 950M -> Tesla M10
+
+    # TU117 (TU117 -> Nvidia Tesla T4)
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1FF9 0x0000	# Quadro T1000 Mobile
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F99 0x0000	# TU1117 Mobile Unknown
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1FAE 0x0000	# TU1117GL Unknown
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1FB8 0x0000	# Quadro T2000 Mobile Max-Q
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1FB9 0x0000	# Quadro T1000 Mobile
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1FBF 0x0000	# TU1117GL Unknown
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F97 0x0000	# GeForce MX450
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F98 0x0000	# GeForce MX450
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F9C 0x0000	# GeForce MX450
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1FBB 0x0000	# Quadro T500 Mobile
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1FD9 0x0000	# GeForce GTX 1650 Mobile Refresh
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F81 0x0000	# TU117 Unknown
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F82 0x0000	# GeForce GTX 1650
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F91 0x0000	# GTX 1650 Mobile Max-Q
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F92 0x0000	# GTX 1650 Mobile
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F94 0x0000	# GTX 1650 Mobile
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F95 0x0000	# GTX 1650 Ti Mobile
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F96 0x0000	# GTX 1650 Mobile Max-Q
+    # TU116 (TU116 -> Nvidia Tesla T4)
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x2182 0x0000	# GTX 1660 Ti
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x2183 0x0000	# TU116 Unknown
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x2184 0x0000	# GTX 1660
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x2187 0x0000	# GTX 1650 SUPER
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x2188 0x0000	# GTX 1650
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x2191 0x0000	# GTX 1660 Ti Mobile
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x2192 0x0000	# GTX 1650 Ti Mobile
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x21AE 0x0000	# TU116GL Unknown
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x21BF 0x0000	# TU116GL Unknown
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x21C4 0x0000	# GTX 1650 Mobile Max-Q
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x21D1 0x0000	# GTX 1660 Ti Mobile
+    # TU106 (TU106 -> Nvidia Tesla T4)
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F02 0x0000	# RTX 2070 8GB
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F04 0x0000	# TU106 Unknown
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F06 0x0000	# RTX 2060 SUPER
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F07 0x0000	# RTX 2070 Rev. A
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F08 0x0000	# RTX 2060 6GB
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F09 0x0000	# GTX 1660 Super
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F0A 0x0000	# GTX 1650
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F10 0x0000	# RTX 2070 Mobile
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F11 0x0000	# RTX 2060 Mobile
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F12 0x0000	# RTX 2060 Mobile Max-Q
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F14 0x0000	# RTX 2070 Mobile Max-Q
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F15 0x0000	# RTX 2060 Mobile
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F2E 0x0000	# TU106M Mobile Unknown
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F36 0x0000	# TU106GLM Mobile Unknown
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F42 0x0000	# RTX 2060 SUPER
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F47 0x0000	# RTX 2060 SUPER
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F50 0x0000	# RTX 2070 Mobile
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1F51 0x0000	# RTX 2060 Mobile
+    # TU104 (TU104 -> Nvidia Tesla T4)
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1E81 0x0000	# RTX 2080 Super
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1E82 0x0000	# RTX 2080
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1E84 0x0000	# RTX 2070 Super
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1E87 0x0000	# RTX 2080 Rev. A
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1E89 0x0000	# RTX 2060
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1Eb0 0x0000	# Quadro RTX 5000
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x10DE 0x1EB8 0x1Eb1 0x0000	# Quadro RTX 4000
     echo
 fi
 
