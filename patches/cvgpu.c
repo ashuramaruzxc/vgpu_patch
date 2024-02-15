@@ -533,10 +533,13 @@ int ioctl(int fd, int request, void *data)
       spoofed_devid = 0x1db6; // Tesla V100 32GB PCIE
     }
     // Turing
+    // TODO: rewrite this module and change to Tesla T4
     if ((0x1e02 <= actual_devid && actual_devid <= 0x1ff9) ||
       (0x2182 <= actual_devid && actual_devid <= 0x21d1)) {
-      spoofed_devid = 0x1e30; // Quadro RTX 6000
-      spoofed_subsysid = 0x12ba;
+        spoofed_devid = 0x10de // Tesla T4
+        spoofed_subsysid = 0x1eb8
+      //spoofed_devid = 0x1e30; // Quadro RTX 6000
+      //spoofed_subsysid = 0x12ba;
       //spoofed_devid = 0x1e89; // GeForce RTX 2060 6GB
       //spoofed_subsysid = 0x134d;
       //spoofed_devid = 0x1e84; // GeForce RTX 2070 8GB
