@@ -3,3 +3,4 @@ NVIDIA-Windows-x86_64-*
 *[-_]win*[-_]64bit*.exe
 nsigpatch
 wtestsign/
+.direnv/
