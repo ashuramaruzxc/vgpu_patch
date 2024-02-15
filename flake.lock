@@ -1,6 +1,6 @@
 {
   "nodes": {
-    "frida": {
+    "frida-nix": {
       "inputs": {
         "nixpkgs": "nixpkgs"
       },
@@ -85,7 +85,7 @@
     },
     "root": {
       "inputs": {
-        "frida": "frida",
+        "frida-nix": "frida-nix",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_3"
       }

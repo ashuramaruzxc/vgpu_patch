@@ -2,14 +2,14 @@
   description = "An FHS shell with conda and cuda";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    frida.url = "github:itstarsun/frida-nix";
+    frida-nix.url = "github:itstarsun/frida-nix";
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
-    frida,
+    frida-nix,
   }: let
     pkgs = import nixpkgs {
       system = "x86_64-linux";
@@ -18,6 +18,7 @@
     inherit (nixpkgs) lib;
     inherit (pkgs.cudaPackages_12_0) cudatoolkit cudnn;
     nvidiaX11 = pkgs.linuxKernel.packages.linux_xanmod.nvidia_x11;
+    frida = frida-nix.packages.${pkgs.system}.frida-tools;
 
     libs = [
       pkgs.stdenv.cc.cc.lib
@@ -30,47 +31,49 @@
       (pkgs.buildFHSUserEnv {
         name = "default";
         targetPkgs = pkgs:
-          with pkgs; [
-            python311
-            gcc
-            autoconf
-            binutils
-            findutils
-            openssl
-            gnutls
-            libxcrypt-legacy
-            curl
-            freeglut
-            git
-            gitRepo
-            gnumake
-            gnupg
-            gperf
-            libGLU
-            libGL
-            libselinux
-            m4
-            ncurses5
-            procps
-            unzip
-            util-linux
-            wget
-            xorg.libICE
-            xorg.libSM
-            xorg.libX11
-            xorg.libXext
-            xorg.libXi
-            xorg.libXmu
-            xorg.libXrandr
-            xorg.libXrender
-            xorg.libXv
-            zlib
-            cmakeWithGui
-            openblas
-            nvidiaX11
-            cudatoolkit
-            cudnn
-          ];
+          with pkgs;
+            [
+              python311
+              gcc
+              autoconf
+              binutils
+              findutils
+              openssl
+              gnutls
+              libxcrypt-legacy
+              curl
+              freeglut
+              git
+              gitRepo
+              gnumake
+              gnupg
+              gperf
+              libGLU
+              libGL
+              libselinux
+              m4
+              ncurses5
+              procps
+              unzip
+              util-linux
+              wget
+              xorg.libICE
+              xorg.libSM
+              xorg.libX11
+              xorg.libXext
+              xorg.libXi
+              xorg.libXmu
+              xorg.libXrandr
+              xorg.libXrender
+              xorg.libXv
+              zlib
+              cmakeWithGui
+              openblas
+              nvidiaX11
+              cudatoolkit
+              cudnn
+            ]
+            ++ [frida];
         profile = ''
           unset LD_LIBRARY_PATH
           # cuda

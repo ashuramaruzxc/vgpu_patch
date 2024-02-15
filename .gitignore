@@ -4,3 +4,6 @@ NVIDIA-Windows-x86_64-*
 nsigpatch
 wtestsign/
 .direnv/
+*.run
+NVIDIA/*
+venv/
