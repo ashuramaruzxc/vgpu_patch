@@ -632,7 +632,7 @@ if $REPACK; then
     ./${TARGET}/makeself.sh ${REPACK_OPTS} --version-string "${VER_TARGET}" --target-os Linux --target-arch x86_64 \
         ${TARGET} ${TARGET}.run \
         "NVIDIA Accelerated Graphics Driver for Linux-x86_64 ${TARGET#NVIDIA-Linux-x86_64-}" \
-        ./nvidia-installer
+        nvidia-installer
     rm -f ${TARGET}.lsm
     echo "done"
 fi
