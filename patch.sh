@@ -625,8 +625,9 @@ $ENVYPROBES && {
 }
 
 if $REPACK; then
-    set -x
-    REPACK_OPTS="${REPACK_OPTS:---silent}"
+    set -eo pipefail
+    chmod -R +x ${TARGET}
+    REPACK_OPTS="${REPACK_OPTS:-}"
     [ -e ${TARGET}.lsm ] && REPACK_OPTS="${REPACK_OPTS} --lsm ${TARGET}.lsm"
     [ -e ${TARGET}/pkg-history.txt ] && REPACK_OPTS="${REPACK_OPTS} --pkg-history ${TARGET}/pkg-history.txt"
     echo "about to create ${TARGET}.run file"
@@ -636,8 +637,8 @@ if $REPACK; then
         --target-os Linux \
         --target-arch x86_64 \
         ./${TARGET} ./${TARGET}.run \
-        "NVIDIA Accelerated Graphics Driver for Linux-x86_64 ${TARGET#NVIDIA-Linux-x86_64-}" \
-        nvidia-installer
+            "NVIDIA Accelerated Graphics Driver for Linux-x86_64 ${TARGET#NVIDIA-Linux-x86_64-}" \
+            nvidia-installer
     rm -f ${TARGET}.lsm
     echo "done"
 fi
