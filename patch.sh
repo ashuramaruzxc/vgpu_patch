@@ -577,7 +577,7 @@ if $DO_VGPU; then
     # TU116 (TU116 -> Nvidia Tesla T4)
     vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x2182 0x0000	# GTX 1660 Ti
     vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x2183 0x0000	# TU116 Unknown
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x2184 0x0000	# GTX 1660
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x1EB8 0x0 0x2184 0x0000	    # GTX 1660
     vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x2187 0x0000	# GTX 1650 SUPER
     vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x2188 0x0000	# GTX 1650
     vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x2191 0x0000	# GTX 1660 Ti Mobile
@@ -587,10 +587,10 @@ if $DO_VGPU; then
     vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x21C4 0x0000	# GTX 1650 Mobile Max-Q
     vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x21D1 0x0000	# GTX 1660 Ti Mobile
     # TU106 (TU106 -> Nvidia Tesla T4)
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x1F02 0x0000	# RTX 2070 8GB
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x1EB8 0x0 0x1F02 0x0000	    # RTX 2070 8GB
     vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x1F04 0x0000	# TU106 Unknown
     vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x1F06 0x0000	# RTX 2060 SUPER
-    vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x1F07 0x0000	# RTX 2070 Rev. A
+    vcfgclone ${TARGET}/vgpuConfig.xml 0x1EB8 0x0 0x1F07 0x0000	    # RTX 2070 Rev. A
     vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x1F08 0x0000	# RTX 2060 6GB
     vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x1F09 0x0000	# GTX 1660 Super
     vcfgclone ${TARGET}/vgpuConfig.xml 0x1E30 0x12BA 0x1F0A 0x0000	# GTX 1650
